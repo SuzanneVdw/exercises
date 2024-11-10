@@ -1,3 +1,5 @@
+import re
+
 def movie_count(movies, director):
 
     return len([Movie for Movie in movies if Movie.director == director])
@@ -20,5 +22,19 @@ def is_increasing(ns):
 
 def count_matching(xs, ys):
 
-    zipped_counts = zip(xs,ys)
-    return []
+    return len([x for x in list(zip(xs,ys)) if x[0] == x[1]])
+
+def weighted_sum(ns, weights):
+
+    return sum([x[0]*x[1] for x in list(zip(ns,weights))])
+
+def alternating_caps(string):
+
+    string_split_enum = enumerate(list(string))
+    alternating_list = [char[1].upper() if char[0]%2 == 0 else char[1].lower() for char in string_split_enum]
+    return "".join(alternating_list)
+
+def find_repeated_words(sentence):
+
+    words_list = (re.findall(r"(\b[a-zA-Z]+\b)",sentence))
+    return {words_list[index].lower() for index in range(1,len(words_list)) if words_list[index-1].lower() == words_list[index].lower()}
